@@ -11,7 +11,7 @@ const routes = [
         component: OutlineEdit
     }, {
         path: '/item/edit/data',
-        name: 'outline',
+        name: 'data',
         component: DataEdit
     }
 ];
