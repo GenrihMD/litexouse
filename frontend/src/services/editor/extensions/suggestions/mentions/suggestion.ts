@@ -1,9 +1,11 @@
 import { VueRenderer } from '@tiptap/vue-3'
+import { SuggestionOptions } from '@tiptap/suggestion'
 import tippy from 'tippy.js'
+import { Instance as InstanceTippy } from 'tippy.js'
 
 import MentionList from '../../../../../components/Editor/extentions/mentions/MentionList.vue'
 
-export default {
+export const suggestion: Omit<SuggestionOptions, 'editor'> = {
   items: ({ query }) => {
     return [
       'Lea Thompson', 'Cyndi Lauper', 'Tom Cruise', 'Madonna', 'Jerry Hall', 'Joan Collins', 'Winona Ryder', 'Christina Applegate', 'Alyssa Milano', 'Molly Ringwald', 'Ally Sheedy', 'Debbie Harry', 'Olivia Newton-John', 'Elton John', 'Michael J. Fox', 'Axl Rose', 'Emilio Estevez', 'Ralph Macchio', 'Rob Lowe', 'Jennifer Grey', 'Mickey Rourke', 'John Cusack', 'Matthew Broderick', 'Justine Bateman', 'Lisa Bonet',
@@ -12,7 +14,7 @@ export default {
 
   render: () => {
     let component: VueRenderer
-    let popup
+    let popup: InstanceTippy[]
 
     return {
       onStart: props => {
@@ -38,6 +40,7 @@ export default {
           trigger: 'manual',
           placement: 'bottom-start',
         })
+        
       },
 
       onUpdate(props) {

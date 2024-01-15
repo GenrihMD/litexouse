@@ -1,147 +1,10 @@
 <template>
-    <q-toolbar v-if="editor" class="menu-bar toolbar-border q-pa-xs" style="flex-wrap: wrap; height:fit-content; display:flex;">
-
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleBold().run()"
-              :disabled="!editor.can().chain().focus().toggleBold().run()"
-              :class="{  'menu-button-active': editor.isActive('bold') }">
-        bold
-      </q-btn>
-
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleItalic().run()"
-              :disabled="!editor.can().chain().focus().toggleItalic().run()"
-              :class="{  'menu-button-active': editor.isActive('italic') }">
-        italic
-      </q-btn>
-
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleStrike().run()"
-              :disabled="!editor.can().chain().focus().toggleStrike().run()"
-              :class="{  'menu-button-active': editor.isActive('strike') }">
-        strike
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleCode().run()"
-              :disabled="!editor.can().chain().focus().toggleCode().run()"
-              :class="{  'menu-button-active': editor.isActive('code') }">
-        code
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().unsetAllMarks().run()">
-        clear marks
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().clearNodes().run()">
-        clear nodes
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().setParagraph().run()"
-              :class="{  'menu-button-active': editor.isActive('paragraph') }">
-        paragraph
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-              :class="{  'menu-button-active': editor.isActive('heading', { level: 1 }) }">
-        h1
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-              :class="{  'menu-button-active': editor.isActive('heading', { level: 2 }) }">
-        h2
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
-              :class="{  'menu-button-active': editor.isActive('heading', { level: 3 }) }">
-        h3
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleHeading({ level: 4 }).run()"
-              :class="{  'menu-button-active': editor.isActive('heading', { level: 4 }) }">
-        h4
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
-              :class="{  'menu-button-active': editor.isActive('heading', { level: 5 }) }">
-        h5
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
-              :class="{  'menu-button-active': editor.isActive('heading', { level: 6 }) }">
-        h6
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleBulletList().run()"
-              :class="{  'menu-button-active': editor.isActive('bulletList') }">
-        bullet list
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleOrderedList().run()"
-              :class="{  'menu-button-active': editor.isActive('orderedList') }">
-        ordered list
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleCodeBlock().run()"
-              :class="{  'menu-button-active': editor.isActive('codeBlock') }">
-        code block
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().toggleBlockquote().run()"
-              :class="{  'menu-button-active': editor.isActive('blockquote') }">
-        blockquote
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().setHorizontalRule().run()">
-        horizontal rule
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().setHardBreak().run()">
-        hard break
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().undo().run()" :disabled="!editor.can().chain().focus().undo().run()">
-        undo
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().redo().run()" :disabled="!editor.can().chain().focus().redo().run()">
-        redo
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().setTextAlign('left').run()"
-              :class="{  'menu-button-active': editor.isActive({ textAlign: 'left' }) }">
-        left
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().setTextAlign('center').run()"
-              :class="{  'menu-button-active': editor.isActive({ textAlign: 'center' }) }">
-        center
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().setTextAlign('right').run()"
-              :class="{  'menu-button-active': editor.isActive({ textAlign: 'right' }) }">
-        right
-      </q-btn>
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.chain().focus().setTextAlign('justify').run()"
-              :class="{  'menu-button-active': editor.isActive({ textAlign: 'justify' }) }">
-        justify
-      </q-btn>
-
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.commands.setTextDirection('rtl')"
-              :class="{  'menu-button-active': editor.isActive({ dir: 'rtl' }) }">
-        RTL
-      </q-btn>
-
-
-      <q-btn flat padding="xs" icon="undo"  @click="editor.commands.setTextDirection('ltr')"
-              :class="{  'menu-button-active': editor.isActive({ dir: 'ltr' }) }">
-        LTR
-      </q-btn>
+    <q-toolbar v-if="editor" class="menu-bar toolbar-border q-pa-xs"
+        style="flex-wrap: wrap; height:fit-content; display:flex;">
 
         <q-btn flat padding="xs" icon="undo" @click="editor.chain().focus().undo().run()">
             <q-tooltip class="menu-button-tooltip" transition-duration=0>
-                <div class="tooltip-wrapper">
+               <div class="tooltip-wrapper">
                     <div>Undo</div>
                     <div>
                         <div><strong>Shortcuts</strong></div>
@@ -348,6 +211,15 @@
             </q-tooltip>
         </q-btn>
 
+        <q-btn flat padding="xs" icon="code" @click="editor.chain().focus().toggleCode().run()"
+            :disabled="!editor.can().chain().focus().toggleCode().run()" :class="{ 'is-active': editor.isActive('code') }">
+            <q-tooltip class="menu-button-tooltip" transition-duration=0>
+                <div class="tooltip-wrapper">
+                    <div>Code Line</div>
+                </div>
+            </q-tooltip>
+        </q-btn>
+
         <q-btn flat padding="xs" icon="format_indent_increase" @click="editor.chain().focus().toggleBlockquote().run()"
             :class="{ 'menu-button-active': editor.isActive('blockquote') }">
             <q-tooltip class="menu-button-tooltip" transition-duration=0>
@@ -356,6 +228,26 @@
                     <div><strong>Shortcuts</strong></div>
                     <div>Windows/Linus: <strong>Control Shift B</strong></div>
                     <div>MacOS: <strong>Cmd Shift B</strong></div>
+                </div>
+            </q-tooltip>
+        </q-btn>
+
+        <q-separator vertical inset />
+
+        <q-btn flat padding="xs" icon="format_textdirection_r_to_l" @click="editor.commands.setTextDirection('rtl')"
+            :class="{ 'is-active': editor.isActive({ dir: 'rtl' }) }">
+            <q-tooltip class="menu-button-tooltip" transition-duration=0>
+                <div class="tooltip-wrapper">
+                    <div>RTL</div>
+                </div>
+            </q-tooltip>
+        </q-btn>
+
+        <q-btn flat padding="xs" icon="format_textdirection_l_to_r" @click="editor.commands.setTextDirection('ltr')"
+            :class="{ 'is-active': editor.isActive({ dir: 'ltr' }) }">
+            <q-tooltip class="menu-button-tooltip" transition-duration=0>
+                <div class="tooltip-wrapper">
+                    <div>LTR</div>
                 </div>
             </q-tooltip>
         </q-btn>
@@ -384,6 +276,15 @@
                 <div>Insert Horizontal Rule</div>
             </q-tooltip>
         </q-btn>
+
+        <q-btn flat padding="xs" icon="keyboard_return" @click="editor.chain().focus().setHardBreak().run()">
+            <q-tooltip class="menu-button-tooltip" transition-duration=0>
+                <div class="tooltip-wrapper">
+                    <div>Hard break</div>
+                </div>
+            </q-tooltip>
+        </q-btn>
+
 
         <q-separator vertical inset />
 
@@ -418,10 +319,34 @@
         </q-btn>
 
         <q-separator vertical inset />
-        
+
         <q-btn flat padding="xs" icon="format_clear" @click="editor.chain().focus().unsetAllMarks().run()">
             <q-tooltip class="menu-button-tooltip" transition-duration=0>
                 <div>Clear Formating</div>
+            </q-tooltip>
+        </q-btn>
+
+        <q-btn flat padding="xs" icon="clear_all" @click="editor.chain().focus().unsetAllMarks().run()">
+            <q-tooltip class="menu-button-tooltip" transition-duration=0>
+                <div class="tooltip-wrapper">
+                    <div>Clear marks</div>
+                </div>
+            </q-tooltip>
+        </q-btn>
+
+        <q-btn flat padding="xs" icon="clear" @click="editor.chain().focus().clearNodes().run()">
+            <q-tooltip class="menu-button-tooltip" transition-duration=0>
+                <div class="tooltip-wrapper">
+                    <div>Clear nodes</div>
+                </div>
+            </q-tooltip>
+        </q-btn>
+
+        <q-btn flat padding="xs" icon="fullscreen" @click="onFullscreenClick">
+            <q-tooltip class="menu-button-tooltip" transition-duration=0>
+                <div class="tooltip-wrapper">
+                    <div>Fullscreen</div>
+                </div>
             </q-tooltip>
         </q-btn>
     </q-toolbar>
@@ -477,7 +402,6 @@ export default defineComponent({
         }
 
         const imageDialog = ref<ImageDialog>()
-
         const editor = inject(editorInjectionKey) as Ref<Editor>
 
         const { fontFamily,
@@ -531,7 +455,7 @@ export default defineComponent({
             // if (url) {
             //     editor.value?.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
             // }
-        }
+        } 
 
         const checkMark = (inMark) => editor.value.getAttributes(inMark).fontSize;
 
@@ -553,13 +477,9 @@ export default defineComponent({
             linkProperties.value = false
         }
 
-        const changeFontFamily = (value: string) => {
-            editor.value.chain().focus().setFontFamily(value).run()
-        }
+        const changeFontFamily = (value: string) => editor.value.chain().focus().setFontFamily(value).run()
 
-        const changeFontSize = (value: string) => {
-            editor.value.chain().focus().setFontSize(value).run()
-        }
+        const changeFontSize = (value: string) => editor.value.chain().focus().setFontSize(value).run()
 
         const changeBlockType = (value: string) => {
             switch (value) {
@@ -654,6 +574,12 @@ export default defineComponent({
             opacity
         }
     },
+
+    methods: {
+        onFullscreenClick() {
+            this.$emit('fullscreen')
+        }
+    }
 })
 </script>
 

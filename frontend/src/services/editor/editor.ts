@@ -16,13 +16,17 @@ import Underline from '@tiptap/extension-underline'
 import Gapcursor from '@tiptap/extension-gapcursor'
 import TaskItem from '@tiptap/extension-task-item'
 import TaskList from '@tiptap/extension-task-list'
+import Mention from '@tiptap/extension-mention'
+import Typography from '@tiptap/extension-typography'
 
+import { suggestion } from './extensions/suggestions/mentions/suggestion.ts'
 
 import Link from './extensions/link'
 import FontSize from './extensions/font-size'
 import FontColor from './extensions/font-color'
 import FontBackgroundColor from './extensions/font-background-color'
 import Image from './extensions/image'
+import { InlineSuggestion } from "./extensions/suggestions/inline";
 
 import DraggableItem from './extensions/blocks/draggable/DraggableItem'
 
@@ -66,11 +70,16 @@ export const createEditor = () => {
       FontFamily,
 
       Highlight.configure({ multicolor: true }),
-      Link.configure({ openOnClick: false }),
+
+      Link.configure({ 
+        openOnClick: false,
+        linkOnPaste: true,
+      }),
       
       FontSize,
       FontColor,
       FontBackgroundColor,
+      Typography,
       Image,
       Dropcursor,
       Underline,
@@ -83,8 +92,29 @@ export const createEditor = () => {
       SmilieReplacer,
       ColorHighlighter,
       LineHeight,
-      BackColor
+      BackColor,
+
+      Mention.configure({
+        HTMLAttributes: {
+          class: 'mention',
+        },
+        suggestion,
+      }),
+
+      InlineSuggestion.configure(
+        {
+          fetchAutocompletion: async (query) => {
+            return 'Ваш текст: ' + query;
+          }
+        }
+      ),
     ],
+
+    editorProps: {
+      attributes: {
+        class: 'prose prose-invert w-[768px] focus:outline-none'
+      }
+    },
 
     autofocus: true,
 

@@ -11,13 +11,14 @@
           {{ item }}
         </button>
       </template>
+      
       <div class="item" v-else>
         No result
       </div>
     </div>
   </template>
   
-  <script>
+  <script lang="ts">
   export default {
     props: {
       items: {

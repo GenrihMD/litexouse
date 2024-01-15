@@ -1,21 +1,29 @@
 <script setup lang="ts">
-import { provide } from 'vue';
+import { Ref, provide, ref } from 'vue';
 import { EditorContent } from '@tiptap/vue-3'
 import { editorInjectionKey, useEditor } from '../../services/editor'
+import { toggleFullscreen } from '../../services/editor/functions/fullscreen'
 
 import MenuBar from './BarMenu/MenuBar.vue'
 
 const editor = useEditor();
+const editorWrapper: Ref<HTMLElement | null> = ref(null)
 
 //TODO: Add editor ID
 provide(editorInjectionKey, editor)
+
+const goFullscreen = () => {
+  if (!editorWrapper.value) return;
+  toggleFullscreen(editorWrapper.value)
+}
 </script>
  
 <template>
-<div class="row editor-wrapper">
-
+<div class="row editor-wrapper" ref="editorWrapper">
     <div class="menu-holder">
-        <MenuBar/>
+        <MenuBar
+          @fullscreen="goFullscreen"
+        />
     </div>
 
     <q-separator Horizontal inset />
@@ -29,6 +37,10 @@ provide(editorInjectionKey, editor)
 </template>
 
 <style>
+.tiptap.ProseMirror {
+  outline: none;
+}
+
 .menu-holder {
     position: relative;
     height: 44px;
@@ -39,11 +51,13 @@ provide(editorInjectionKey, editor)
     min-height: 500px;
     display: flex;
     flex-direction: column;
+    background-color: #fff;
 }
 .content-wrapper {
     padding: 0 10px;
 }
 
+/* Clor preview */
 .color {
   white-space: nowrap;
 
@@ -61,6 +75,7 @@ provide(editorInjectionKey, editor)
   }
 }
 
+/*TaskList*/
 ul[data-type="taskList"] {
   list-style: none;
   padding: 0;
@@ -83,6 +98,20 @@ ul[data-type="taskList"] {
   input[type="checkbox"] {
     cursor: pointer;
   }
+}
+
+/*Mention*/
+.mention {
+  border: 1px solid #000;
+  border-radius: 0.4rem;
+  padding: 0.1rem 0.3rem;
+  box-decoration-break: clone;
+}
+
+/*Inline suggestion*/
+[data-inline-suggestion]::after {
+  content: attr(data-inline-suggestion);
+  color: #999;
 }
 </style>
 
