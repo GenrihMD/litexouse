@@ -3,7 +3,6 @@ import CommonEditor from '../Editor/CommonEditor.vue'
 </script>
 
 <template>
-    ferkljhbx
     <CommonEditor></CommonEditor>
 </template>
 

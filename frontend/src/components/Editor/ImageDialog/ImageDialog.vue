@@ -517,18 +517,21 @@
 <script lang="ts">
 import { defineComponent, inject, ref, Ref } from 'vue'
 import { Editor } from '@tiptap/vue-3'
-import * as InjectionKeys from '../Types/injection-keys'
-import ImageItem from '../Types/image-item'
-import {iImageAttributes} from '../Types/image-attributes'
+import { iImageAttributes } from '../../../services/editor/types/image-attributes'
+import { editorInjectionKey } from '../../../services/editor'
+
 export default defineComponent({
   components: {
-
+    ImageItem
   },
+
   setup(props, {emit}) {
     const getPattributes = ref<iImageAttributes>(props.pattributes as iImageAttributes)
     const getMode = ref<string>(props.mode as string)
     const newMode = ref(props.mode)
-    const editor = inject(InjectionKeys.editorKey) as Ref<Editor>
+
+    const editor = inject(editorInjectionKey) as Ref<Editor>
+
     // <q-select v-model="imageHeightUom" :options="imageUomOptions" dense label="Standard" />
     const imageHeightDisabled = ref(true)
     const imageWidthDisabled = ref(true)
@@ -543,6 +546,7 @@ export default defineComponent({
     // const imageArray = ref<Array<ImageItem>>([])
     // const imageArray = ref<Array<ImageItem>>(props.images as Array<ImageItem>)
     const imageArray = inject(InjectionKeys.imageSelectionsKey) as Ref<ImageItem[]>
+    
     const selectedImage = ref('')
     const imageConstrainProportions = ref(true)
     const imageSrc = ref('')
